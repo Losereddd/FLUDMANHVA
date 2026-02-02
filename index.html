@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ресницы под бордюром</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --milk:#f4f5f3;
+  --fog:#e1e4df;
+  --sage:#b6c1b3;
+  --deep:#7e8b7a;
+  --ink:#262b27;
+  --glass:rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  color:var(--ink);
+  background:var(--milk);
+  overflow-x:hidden;
+}
+/* BACKGROUND FLOW */
+.fog-layer{
+  position:fixed;
+  inset:0;
+  background:url('зображення_viber_2026-02-02_22-26-09-513.jpg') center/cover no-repeat;
+  filter:blur(6px) brightness(1.1);
+  transform:scale(1.1);
+  z-index:-3;
+}
+.fog-move{
+  position:fixed;
+  inset:-20%;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+             radial-gradient(circle at 70% 60%, rgba(255,255,255,.25), transparent 55%);
+  animation:fog 40s linear infinite;
+  z-index:-2;
+}
+@keyframes fog{from{transform:translateX(0)}to{transform:translateX(-15%)}}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+.hero-box{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border-radius:40px;
+  padding:70px;
+  box-shadow:0 40px 90px rgba(0,0,0,.25);
+  animation:heroIn 2s ease forwards;
+}
+.hero h1{
+  font-family:"Playfair Display", serif;
+  font-size:clamp(3.5rem,8vw,6rem);
+  letter-spacing:0.2em;
+}
+.hero p{
+  font-size:1.2rem;
+  opacity:.85;
+}
+.hero a{
+  display:inline-block;
+  margin-top:50px;
+  padding:18px 40px;
+  border-radius:60px;
+  background:var(--deep);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  animation:pulse 3s infinite;
+}
+@keyframes heroIn{from{opacity:0; transform:translateY(60px)}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+/* CONTENT */
+section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:120px 24px;
+}
+.rule{
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  border-radius:36px;
+  padding:60px;
+  margin-bottom:120px;
+  box-shadow:0 35px 80px rgba(0,0,0,.18);
+  transform:translateY(120px) scale(.95);
+  opacity:0;
+  transition:1.2s ease;
+}
+.rule.show{opacity:1; transform:none}
+.rule h2{
+  font-family:"Playfair Display", serif;
+  font-size:2.8rem;
+}
+.rule p{line-height:1.9}
+.sep{margin:50px 0; text-align:center; letter-spacing:.5em}
+
+footer{
+  padding:120px 20px;
+  text-align:center;
+  background:linear-gradient(180deg, transparent, var(--fog));
+}
+/* DECORATIVE ELEMENTS */
+.grid{
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  z-index:-1;
+}
+.float-box{
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:24px;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(14px);
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  animation:float 18s infinite ease-in-out;
+}
+.float-box.small{width:70px;height:70px;animation-duration:22s}
+.float-box.tiny{width:40px;height:40px;animation-duration:26s}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-60px)}
+  100%{transform:translateY(0)}
+}
+/* === HEAVY BACKGROUND SYSTEM === */
+.bg-gradient{
+  position:fixed; inset:0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(182,193,179,.35), transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(255,255,255,.45), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(142,154,138,.35), transparent 50%);
+  z-index:-6;
+}
+.bg-lines{
+  position:fixed; inset:0;
+  background-image:linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+  background-size:100% 48px;
+  opacity:.35;
+  z-index:-5;
+}
+.bg-orbs{
+  position:fixed; inset:0;
+  background:
+    radial-gradient(circle at 20% 70%, rgba(255,255,255,.25), transparent 35%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,.18), transparent 40%);
+  animation:orbs 30s linear infinite;
+  z-index:-4;
+}
+@keyframes orbs{from{transform:translateY(0)}to{transform:translateY(-200px)}}
+
+/* === FLOATING DECOR === */
+.decor{
+  position:absolute;
+  border-radius:28px;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(16px);
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+  animation:floatDecor 20s ease-in-out infinite;
+}
+.decor-1{width:180px;height:180px;top:25%;left:-60px}
+.decor-2{width:120px;height:120px;top:65%;right:-40px;animation-duration:26s}
+.decor-3{width:90px;height:260px;top:110%;left:10%;animation-duration:32s}
+.decor-4{width:220px;height:140px;top:150%;right:12%;animation-duration:28s}
+@keyframes floatDecor{0%,100%{transform:translateY(0)}50%{transform:translateY(-90px)}}
+
+/* === RULE CARD UPGRADE === */
+.rule{
+  border:1px solid rgba(255,255,255,.35);
+}
+.rule::after{
+  content:"";
+  position:absolute;
+  inset:auto 20px 20px auto;
+  width:80px; height:80px;
+  border-radius:18px;
+  background:rgba(255,255,255,.15);
+}
+</style>
+<style>
+/* EXTRA VISUAL DENSITY – NO TEXT CHANGES */
+.side-image{
+  position:absolute;
+  width:280px;
+  height:420px;
+  border-radius:40px;
+  background:url('зображення_viber_2026-02-02_22-26-09-513.jpg') center/cover no-repeat;
+  opacity:.35;
+  filter:grayscale(20%) blur(1px);
+  box-shadow:0 40px 90px rgba(0,0,0,.25);
+}
+.side-image.left{left:-120px; top:20%}
+.side-image.right{right:-120px; top:55%}
+
+.noise{
+  pointer-events:none;
+  position:fixed;
+  inset:0;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.03"/></svg>');
+  z-index:10;
+}
+
+.rule::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:36px;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+  opacity:.6;
+}
+
+.rule{
+  position:relative;
+}
+</style>
+</head>
+<body>
+<!-- MASSIVE VISUAL LAYERS -->
+<div class="bg-gradient"></div>
+<div class="bg-lines"></div>
+<div class="bg-orbs"></div>
+<div class="decor decor-1"></div>
+<div class="decor decor-2"></div>
+<div class="decor decor-3"></div>
+<div class="decor decor-4"></div>
+<div class="grid"></div>
+<div class="float-box" style="top:15%;left:8%"></div>
+<div class="float-box small" style="top:40%;left:85%"></div>
+<div class="float-box tiny" style="top:70%;left:15%"></div>
+<div class="float-box small" style="top:80%;left:75%"></div>
+
+<div class="fog-layer"></div>
+<div class="fog-move"></div>
+
+<div class="hero">
+  <div class="hero-box">
+    <h1>КЛУБ СОЦИОФОБОВ</h1>
+    <p>ресницы под бордюром</p>
+    <a href="https://t.me/+Mqdddkvo03A5ZjFi" target="_blank">ОСНОВНАЯ ИНФОРМАЦИЯ • TELEGRAM</a>
+  </div>
+</div>
+
+<section>
+<div class="side-image left"></div>
+<div class="side-image right"></div>
+
+<div class="rule">
+<h2>ПРАВИЛА ФЛУДА</h2>
+<p>1.1 Оскорбления запрещены, если за вами будет замечено некультурное поведение, НЕ в качестве шутки, будут приняты серьёзные меры (мут от 10 минут вплоть до 3 часов / варн, в зависимости от тяжести нарушения).</p>
+<p>1.2 Оскорбления администрации караются ещё больше. Если администрация повысила свои полномочия — напишите владельцу. Если же вы будете замечены за нарушением, последуют более жёсткие наказания (мут от 5 часов вплоть до 7 часов / варн / исключение, в зависимости от тяжести).</p>
+<p>1.3 Оскорбления какой-либо родословной участника караются сразу мутом 3 часа и варном.</p>
+<div class="sep">— — —</div>
+<p>2.1 Спам запрещён в любом виде, независимо: стикеры, гиф или сообщения. (Спам — отправка нескольких одинаковых сообщений за короткий промежуток времени). Карается мутом 5–10 минут / варном / исключением или даже баном (зависит от масштаба).</p>
+<p>2.2 Распространение информации 18+ (насилие, расчленёнка, порнография) категорически запрещено. Если хотите отправить неприятный контент — блюрьте. Нарушение карается мутом от 1 до 3 часов / варном / исключением / блокировкой.</p>
+<p>2.3 Неадекватное поведение разрешается, но не делайте из этого ссору.</p>
+<div class="sep">— — —</div>
+<p>3.1 Маты разрешены, но в меру.</p>
+<p>3.2 В случае срача — идите в лс или к владельцу. Если срач происходит во флуде — мут 1 час всем участникам и 20 минут тем, кто влезал.</p>
+<p>3.3 Норма сообщений — 70 в неделю. Чистка проходит каждую субботу в рандомное время.</p>
+<p>3.4 За день-два до чистки ресты не выдаются. Взять рест можно у Кэрри (@KERRYVENOM).</p>
+<p>3.6 Роль менять можно только 4 раза. Вторую и последующие роли брать запрещено.</p>
+<p>3.7 При неактиве недели и более вы будете кикнуты без права на обжалование.</p>
+<div class="sep">— — —</div>
+<p>4.1 Реклама только с разрешения владельца. Реклама своих флудов запрещена — мут 10 минут + варн.</p>
+<p>4.2 При выходе настоятельно просим написать причину ухода или хотя бы роль, желательно отметив владельца или админов.</p>
+<p>4.3 Сбор участников для использования ботов запрещён — мут 10 минут.</p>
+<p>4.4 Добавление друзей без предупреждения запрещено. Нарушение — ЧС для друга и мут двум участникам на 2 часа.</p>
+<p>• Норма в неделю — 70 сообщений.</p>
+<p>• Принимаем с 10 лет.</p>
+</div>
+
+<div class="rule">
+<h2>ПРАВИЛА АДМИНИСТРАЦИИ</h2>
+<p>1. Администрация не имеет права оскорблять участников. Нарушение — блокировка / кик / разжалование.</p>
+<p>2. Администрация не имеет права создавать ссоры. При конфликте — мут или игнор. Нарушение — кик / бан / разжалование.</p>
+<p>3. Видите нарушение? Немедленно применяйте меры.</p>
+<p>4. Общение с уважением. Все равны.</p>
+<p>5. Оскорбление другого администратора карается понижением на 1–2 ранга.</p>
+<p>В ином случае сначала идёт предупреждение. 3 предупреждения — разжалование.</p>
+</div>
+
+<div class="rule">
+<h2>ВПЕРВЫЕ ВО ФЛУДЕ?</h2>
+<p>Флуд — это чат для общения людей с общими интересами. Может прилагаться ролевая.</p>
+<p>Чистка — удаление неактивных участников (менее 70 сообщений).</p>
+<p>Чтобы проверить актив — напишите боту «кто я».</p>
+<p>Не можете влиться? Обращайтесь к администрации — вас поддержат.</p>
+<p>Если есть вопросы — спрашивайте. Всех обнял ❤</p>
+</div>
+
+<div class="rule">
+<h2>ЧИСТКИ</h2>
+<p>1. Основная чистка по сообщениям (с правом возвращения). Проходит по субботам. 70 сообщений — норма. 3 варна — исключение.</p>
+<p>2. Чистка на возраст (без права возвращения). Проходит с четверга по субботу. Принимаем с 10 лет.</p>
+<p>3. Чистка администрации и должностей. Не выполняешь функции — разжалование.</p>
+</div>
+
+<div class="rule">
+<h2>ТЕРМИНЫ</h2>
+<p>Мут — временное ограничение общения.</p>
+<p>Варн — предупреждение (навсегда).</p>
+<p>Рест — отпуск без варнов за чистку.</p>
+<p>Бан — полная блокировка без возврата.</p>
+<p>Чистка — проверка активности.</p>
+<p>Флуд / ролевая — форматы общения и сюжетной игры.</p>
+</div>
+
+</section>
+
+<footer>
+<p>влд объелся говна, вся информация по ссылке сверху</p>
+</footer>
+
+<script>
+const rules=document.querySelectorAll('.rule');
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('show')})
+},{threshold:0.2});
+rules.forEach(r=>obs.observe(r));
+</script>
+
+<div class="noise"></div>
+</body>
+</html>
